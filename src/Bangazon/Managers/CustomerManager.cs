@@ -25,7 +25,7 @@ public class CustomerManager
         return ActiveCustomer;
     }
 
-    public List<PaymentType> AddPaymentType(PaymentType newPaymentType)
+    public List<PaymentType> AddNewPaymentType(PaymentType newPaymentType)
     {
         AllActiveCustomerPaymentTypes.Add(newPaymentType);
         return AllActiveCustomerPaymentTypes;
@@ -35,10 +35,5 @@ public class CustomerManager
     {
         AllProducts.Add(newProduct);
         return AllProducts;
-    }
-
-    public bool AddProductToOrder(int customerId, int produtId)
-    {
-        return true;
     }
 }

@@ -70,7 +70,7 @@ namespace Bangazon.Tests
                 CustomerId = 13
             };
 
-            List<PaymentType> allPaymentTypes = _customerManager.AddPaymentType(newPaymentType);
+            List<PaymentType> allPaymentTypes = _customerManager.AddNewPaymentType(newPaymentType);
 
             Assert.Contains(newPaymentType, allPaymentTypes);
 
@@ -91,17 +91,6 @@ namespace Bangazon.Tests
             List<Product> allProducts = _customerManager.AddCustomerProduct(newProduct);
 
             Assert.Contains(newProduct, allProducts);
-        }
-
-        [Fact]
-        public void UserShouldBeAbleToAddAProductToCustomerOrder()
-        {
-            int customerId = 1;
-            int productId = 3;
-
-            bool productAddedToOrder = _customerManager.AddProductToOrder(customerId, productId);
-
-            Assert.Equal(productAddedToOrder, true);
         }
         public void Dispose()
         {

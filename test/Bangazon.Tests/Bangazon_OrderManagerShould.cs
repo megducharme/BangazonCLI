@@ -1,35 +1,35 @@
-// using System;
-// using Xunit;
+using System;
+using Xunit;
 
-// namespace Bangazon.Tests
-// {
-//     public class OrderManagerShould
-//     {
+namespace Bangazon.Tests
+{
+    public class OrderManagerShould
+    {
 
-//         private readonly OrderManager _manager;
+        private readonly OrderManager _orderManager;
 
-//         public OrderManagerShould()
-//         {
-//             _manager = new OrderManager();
-//         }
+        public OrderManagerShould()
+        {
+            _orderManager = new OrderManager();
+        }
 
-//         [Fact]
-//         public void CreateNewOrder()
-//         {
-//             Product kite = new Product();
-//             _manager.CreateOrder(kite);
-//         }
+        [Fact]
+        public void CreateNewOrder()
+        {
+            Product kite = new Product();
+            bool newOrder = _orderManager.CreateOrder(kite);
+        }
 
-//         [Fact]
-//         public void ListOrders()
-//         {
+        
+        [Fact]
+        public void UserShouldBeAbleToAddAProductToCustomerOrder()
+        {
+            int customerId = 1;
+            Product coolProduct = new Product();
 
-//         }
+            bool productAddedToOrder = _orderManager.AddProductToOrder(customerId, coolProduct);
 
-//         [Fact]
-//         public void AddPaymentTypeToOrder()
-//         {
-
-//         }
-//     }
-// }
+            Assert.Equal(productAddedToOrder, true);
+        }
+    }
+}
