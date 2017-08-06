@@ -1,9 +1,16 @@
 using System;
 using System.Collections.Generic;
+using Bangazon.Models;
 
 
 public class CustomerManager
 {
+    private DatabaseInterface _db;
+
+    public CustomerManager(DatabaseInterface db)
+    {
+        _db = db;
+    }
     public List<Customer> allCustomers = new List<Customer>();
     public List<PaymentType> AllActiveCustomerPaymentTypes = new List<PaymentType>();
     public List<Product> AllProducts = new List<Product>();

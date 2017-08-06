@@ -1,4 +1,5 @@
 ﻿using System;
+using Bangazon.Models;
 
 namespace Bangazon
 {
@@ -6,6 +7,12 @@ namespace Bangazon
     {
         static void Main(string[] args)
         {
+            DatabaseInterface db = new DatabaseInterface("BANGAZONCLI_DB");
+            db.CheckDatabaseTable("Customer", DbTables.Customer);
+            db.CheckDatabaseTable("Product", DbTables.Product);
+            db.CheckDatabaseTable("PaymentType", DbTables.PaymentType);
+            db.CheckDatabaseTable("[Order]", DbTables.Order);
+
             // Seed the database if none exists
             // var db = new DatabaseInitializer();
             // db.VerifyDataExists();
@@ -22,28 +29,28 @@ namespace Bangazon
 			Int32.TryParse (Console.ReadLine(), out choice);
 
             // If option 1 was chosen, create a new customer account
-            if (choice == 1)
-            {
-                Console.WriteLine ("Enter customer first name");
-                Console.Write ("> ");
-                string firstName = Console.ReadLine();
-                Console.WriteLine ("Enter customer last name");
-                Console.Write ("> ");
-                string lastName = Console.ReadLine();
-                Console.WriteLine ("Enter customer city");
-                Console.Write ("> ");
-                string city = Console.ReadLine();
-                Console.WriteLine ("Enter customer state");
-                Console.Write ("> ");
-                string state = Console.ReadLine();
-                Console.WriteLine ("Enter customer postal code");
-                Console.Write ("> ");
-                string postalCode = Console.ReadLine();
-                Console.WriteLine ("Enter customer phone number");
-                Console.Write ("> ");
-                string phoneNumber = Console.ReadLine();
-                CustomerManager manager = new CustomerManager();
-            }
+            // if (choice == 1)
+            // {
+            //     Console.WriteLine ("Enter customer first name");
+            //     Console.Write ("> ");
+            //     string firstName = Console.ReadLine();
+            //     Console.WriteLine ("Enter customer last name");
+            //     Console.Write ("> ");
+            //     string lastName = Console.ReadLine();
+            //     Console.WriteLine ("Enter customer city");
+            //     Console.Write ("> ");
+            //     string city = Console.ReadLine();
+            //     Console.WriteLine ("Enter customer state");
+            //     Console.Write ("> ");
+            //     string state = Console.ReadLine();
+            //     Console.WriteLine ("Enter customer postal code");
+            //     Console.Write ("> ");
+            //     string postalCode = Console.ReadLine();
+            //     Console.WriteLine ("Enter customer phone number");
+            //     Console.Write ("> ");
+            //     string phoneNumber = Console.ReadLine();
+            //     CustomerManager manager = new CustomerManager();
+            // }
         }
     }
 }
