@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class CustomerManager
 {
     public List<Customer> allCustomers = new List<Customer>();
+    public List<PaymentType> AllActiveCustomerPaymentTypes = new List<PaymentType>();
+    public List<Product> AllProducts = new List<Product>();
     public Customer ActiveCustomer;
 
     public void AddCustomer(Customer newCustomer)
@@ -17,9 +19,26 @@ public class CustomerManager
         return allCustomers;
     }
 
-    public Customer SelectActiveCustomer(Customer selectedCustomer)
+    public Customer SetActiveCustomer(Customer selectedCustomer)
     {
         ActiveCustomer = selectedCustomer;
         return ActiveCustomer;
+    }
+
+    public List<PaymentType> AddPaymentType(PaymentType newPaymentType)
+    {
+        AllActiveCustomerPaymentTypes.Add(newPaymentType);
+        return AllActiveCustomerPaymentTypes;
+    }
+
+    public List<Product> AddCustomerProduct(Product newProduct)
+    {
+        AllProducts.Add(newProduct);
+        return AllProducts;
+    }
+
+    public bool AddProductToOrder(int customerId, int produtId)
+    {
+        return true;
     }
 }
