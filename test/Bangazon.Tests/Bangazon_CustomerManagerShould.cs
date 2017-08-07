@@ -1,17 +1,19 @@
 using System;
 using Xunit;
 using System.Collections.Generic;
+using Bangazon.Models;
 
 namespace Bangazon.Tests
 {
     public class CustomerManagerShould: IDisposable
     {
         private readonly CustomerManager _customerManager;
+        private DatabaseInterface _db;
 
         public CustomerManagerShould()
         {
-            // _db = new DatabaseInterface("BAGOLOOT_TEST_DB");
-            _customerManager = new CustomerManager();
+            _db = new DatabaseInterface("BAGOLOOT_TEST_DB");
+            _customerManager = new CustomerManager(_db);
         }
 
         [Fact]
@@ -28,7 +30,7 @@ namespace Bangazon.Tests
             };
 
             _customerManager.AddCustomer(customerToAdd);
-            List<Customer> allCustomers = _customerManager.allCustomers;
+            List<Customer> allCustomers = _customerManager.GetAllCustomers();
 
             Assert.Contains(customerToAdd, allCustomers);
         }
@@ -36,9 +38,15 @@ namespace Bangazon.Tests
         [Fact]
         public void ListCustomers()
         {
-           List<Customer> allCustomers = _customerManager.GetAllCustomers();
+            Customer newCustomer = new Customer();
 
-            Assert.True(allCustomers.Count >= 0);
+           List<Customer> allCustomers = _customerManager.GetAllCustomers();
+            Assert.True(allCustomers.Count == 0);
+
+            _customerManager.AddCustomer(newCustomer);
+            List<Customer> allCustomers2 = _customerManager.GetAllCustomers();
+            Assert.True(allCustomers.Count > 0);
+
         }
 
         [Fact]
@@ -73,7 +81,6 @@ namespace Bangazon.Tests
             List<PaymentType> allPaymentTypes = _customerManager.AddNewPaymentType(newPaymentType);
 
             Assert.Contains(newPaymentType, allPaymentTypes);
-
         }
 
         [Fact]

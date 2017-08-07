@@ -1,9 +1,10 @@
 using System;
+using Bangazon.Models;
 using Xunit;
 
 namespace Bangazon.Tests
 {
-    public class OrderManagerShould
+    public class OrderManagerShould: IDisposable
     {
 
         private readonly OrderManager _orderManager;
@@ -24,12 +25,23 @@ namespace Bangazon.Tests
         [Fact]
         public void UserShouldBeAbleToAddAProductToCustomerOrder()
         {
-            int customerId = 1;
             Product coolProduct = new Product();
 
-            bool productAddedToOrder = _orderManager.AddProductToOrder(customerId, coolProduct);
+            bool productAddedToOrder = _orderManager.AddProductToOrder(coolProduct);
 
             Assert.Equal(productAddedToOrder, true);
+        }
+
+        [Fact]
+        public void GetActiveCustomerOrder()
+        {
+           int customerOrderId = _orderManager.GetCustomerOrder();
+        }
+
+        public void Dispose()
+        {
+            // _db.Delete("DELETE FROM toy");
+            // _db.Delete("DELETE FROM child");
         }
     }
 }
