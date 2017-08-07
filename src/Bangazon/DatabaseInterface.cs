@@ -5,8 +5,6 @@ using System.Linq;
 using Microsoft.Data.Sqlite;
 using System.Collections;
 
-
-
     public class DatabaseInterface
     {
         private string _connectionString;
@@ -80,14 +78,28 @@ using System.Collections;
             return insertedItemId;
         }
 
-        public void CheckDatabaseTable (string tableName, string tableProperties)
+        public void BulkInsert(string command)
+        {
+            using (_connection)
+            {
+                _connection.Open ();
+                SqliteCommand dbcmd = _connection.CreateCommand ();
+                dbcmd.CommandText = command;
+                
+                dbcmd.ExecuteNonQuery ();
+
+                dbcmd.Dispose ();
+                _connection.Close ();
+            }
+        }
+
+        public void CheckDatabaseTable (string tableName, string command)
         {
             using (_connection)
             {
                 _connection.Open();
                 SqliteCommand dbcmd = _connection.CreateCommand ();
 
-                // Query the child table to see if table is created
                 dbcmd.CommandText = $"select id from {tableName}";
 
                 try
@@ -101,14 +113,14 @@ using System.Collections;
                     Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
-                        dbcmd.CommandText = tableProperties;
+                        dbcmd.CommandText = command;
                         try
                         {
                             dbcmd.ExecuteNonQuery ();
                         }
                         catch (Microsoft.Data.Sqlite.SqliteException crex)
                         {
-                            Console.WriteLine("Table already exists. Ignoring");
+                            Console.WriteLine(crex + "Table already exists. Ignoring");
                         }
                         dbcmd.Dispose ();
                     }
@@ -116,47 +128,4 @@ using System.Collections;
                 _connection.Close ();
             }
         }
-
-        // public void CheckToyTable ()
-        // {
-        //     using (_connection)
-        //     {
-        //         _connection.Open();
-        //         SqliteCommand dbcmd = _connection.CreateCommand ();
-
-        //         // Query the child table to see if table is created
-        //         dbcmd.CommandText = $"select id from toy";
-
-        //         try
-        //         {
-        //             // Try to run the query. If it throws an exception, create the table
-        //             using (SqliteDataReader reader = dbcmd.ExecuteReader()) { }
-        //             dbcmd.Dispose ();
-        //         }
-        //         catch (Microsoft.Data.Sqlite.SqliteException ex)
-        //         {
-        //             Console.WriteLine(ex.Message);
-        //             if (ex.Message.Contains("no such table"))
-        //             {
-        //                 dbcmd.CommandText = $@"create table toy (
-        //                     `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-        //                     `name`	varchar(80) not null, 
-        //                     `childId` integer not null,
-        //                     FOREIGN KEY(`childId`) REFERENCES `child`(`id`)
-        //                 )";
-        //                 try
-        //                 {
-        //                     dbcmd.ExecuteNonQuery ();
-        //                 }
-        //                 catch (Microsoft.Data.Sqlite.SqliteException crex)
-        //                 {
-        //                     Console.WriteLine("Table already exists. Ignoring");
-        //                 }
-
-        //                 dbcmd.Dispose ();
-        //             }
-        //         }
-        //         _connection.Close ();
-        //     }
-        // }
     }

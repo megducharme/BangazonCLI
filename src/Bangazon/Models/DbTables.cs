@@ -15,8 +15,7 @@ namespace Bangazon.Models
                                 `price` integer not null,
                                 `datecreated` datetime not null,
                                 CustomerId INTEGER NOT NULL,
-                                FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId)
-                )";
+                                FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId))";
             }
         }
         
@@ -30,8 +29,7 @@ namespace Bangazon.Models
                                 `address` varchar(80) not null,
                                 `city` varchar(80) not null,
                                 `zip` integer not null,
-                                `phone` integer not null
-                        )";
+                                `phone` integer not null)";
             }
         }
 
@@ -44,8 +42,7 @@ namespace Bangazon.Models
                                 `name`	varchar(80) not null, 
                                 `accountnumber` integer not null,
                                 CustomerId INTEGER NOT NULL,
-                                FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId)
-                        )";
+                                FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId))";
             }
         }
 
@@ -61,8 +58,7 @@ namespace Bangazon.Models
                                 CustomerId INTEGER NOT NULL,
                                 PaymentTypeId INTEGER NOT NULL,
                                 FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId),
-                                FOREIGN KEY (PaymentTypeId) REFERENCES PaymentType(PaymentTypeId)
-                        )";
+                                FOREIGN KEY (PaymentTypeId) REFERENCES PaymentType(PaymentTypeId))";
             }
         }
         public static string OrderProduct
@@ -74,8 +70,7 @@ namespace Bangazon.Models
                                 CustomerId INTEGER NOT NULL,
                                 ProductId INTEGER NOT NULL,
                                 FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId),
-                                FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
-                        )";
+                                FOREIGN KEY (ProductId) REFERENCES Product(ProductId))";
             }
         }
     }

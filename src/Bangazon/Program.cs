@@ -1,5 +1,6 @@
 ﻿using System;
 using Bangazon.Models;
+using Bangazon.Data;
 
 namespace Bangazon
 {
@@ -12,6 +13,7 @@ namespace Bangazon
             db.CheckDatabaseTable("Product", DbTables.Product);
             db.CheckDatabaseTable("PaymentType", DbTables.PaymentType);
             db.CheckDatabaseTable("[Order]", DbTables.Order);
+            DbInitializer.Initialize(db);
 
             // Seed the database if none exists
             // var db = new DatabaseInitializer();
