@@ -17,8 +17,8 @@ namespace Bangazon.Data
                     //if there is something to read (something in the db) then set customersExist to true to exit the loop
                     customersExist = true;
                 }
-                    //if it is immediately false, it will not run moving on to the if
                     //if it did run, it will exit the loop, but customers exist will now be true never executing the if block of code
+                    //if it is immediately false, it will not run the while block, and move on to the if and seed the db
                     if(customersExist == false)
                     {
                         db.BulkInsert($@"
@@ -32,7 +32,22 @@ namespace Bangazon.Data
                             insert into product values (null, 'Cup', 56, 9.99, '2017/08/06', 1);
                             insert into product values (null, 'Purse', 2, 129.99, '2017/08/06', 1);
 
-                            ");
+                            insert into paymenttype values (null, 'Visa', '9826745', 1);
+                            insert into paymenttype values (null, 'MasterCard', '9845745', 2);
+                            insert into paymenttype values (null, 'Chase', '2116745', 1);
+                            insert into paymenttype values (null, 'Visa', '9826745', 3);
+
+                            insert into [order] values (null, '2017/07/08', '2017/07/08', 2, 2);
+                            insert into [order] values (null, '2017/08/08', '2017/08/10', 3, 4);
+                            insert into [order] values (null, '2017/07/08', '2017/08/11', 3, 4);
+                            insert into [order] values (null, '2017/07/08', '2017/08/10', 1, 3);
+
+                            insert into orderproduct values (null, 1, 3);
+                            insert into orderproduct values (null, 1, 4);
+                            insert into orderproduct values (null, 1, 5);
+                            insert into orderproduct values (null, 2, 3);
+
+                        ");
                     }
                 
             });

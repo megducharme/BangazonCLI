@@ -4,7 +4,7 @@ using Bangazon.Models;
 
 public class OrderManager
 {
-    public bool AddProductToOrder(int customerId, Product produtId)
+    public bool AddProductToOrder(Product produtId)
     {
         return true;
     }
@@ -12,5 +12,10 @@ public class OrderManager
     public bool CreateOrder(Product productToAdd)
     {
         return true;
+    }
+
+    public int GetCustomerOrder()
+    {
+        return 3;
     }
 }

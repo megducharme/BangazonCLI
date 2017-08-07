@@ -11,19 +11,19 @@ public class CustomerManager
     {
         _db = db;
     }
-    public List<Customer> allCustomers = new List<Customer>();
-    public List<PaymentType> AllActiveCustomerPaymentTypes = new List<PaymentType>();
-    public List<Product> AllProducts = new List<Product>();
+    private List<Customer> _AllCustomers = new List<Customer>();
+    private List<PaymentType> _AllActiveCustomerPaymentTypes = new List<PaymentType>();
+    private List<Product> _AllProducts = new List<Product>();
     public Customer ActiveCustomer;
 
     public void AddCustomer(Customer newCustomer)
     {
-        allCustomers.Add(newCustomer);
+        _AllCustomers.Add(newCustomer);
     }
 
     public List<Customer> GetAllCustomers()
     {
-        return allCustomers;
+        return _AllCustomers;
     }
 
     public Customer SetActiveCustomer(Customer selectedCustomer)
@@ -34,13 +34,13 @@ public class CustomerManager
 
     public List<PaymentType> AddNewPaymentType(PaymentType newPaymentType)
     {
-        AllActiveCustomerPaymentTypes.Add(newPaymentType);
-        return AllActiveCustomerPaymentTypes;
+        _AllActiveCustomerPaymentTypes.Add(newPaymentType);
+        return _AllActiveCustomerPaymentTypes;
     }
 
     public List<Product> AddCustomerProduct(Product newProduct)
     {
-        AllProducts.Add(newProduct);
-        return AllProducts;
+        _AllProducts.Add(newProduct);
+        return _AllProducts;
     }
 }

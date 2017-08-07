@@ -13,11 +13,8 @@ namespace Bangazon
             db.CheckDatabaseTable("Product", DbTables.Product);
             db.CheckDatabaseTable("PaymentType", DbTables.PaymentType);
             db.CheckDatabaseTable("[Order]", DbTables.Order);
+            db.CheckDatabaseTable("OrderProduct", DbTables.OrderProduct);
             DbInitializer.Initialize(db);
-
-            // Seed the database if none exists
-            // var db = new DatabaseInitializer();
-            // db.VerifyDataExists();
 
             // Present the main menu
             Console.WriteLine ("*************************************************");

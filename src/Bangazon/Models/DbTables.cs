@@ -54,7 +54,6 @@ namespace Bangazon.Models
                                 `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                                 `datecreated` datetime not null,
                                 `dateclosed` datetime, 
-                                `accountnumber` integer not null,
                                 CustomerId INTEGER NOT NULL,
                                 PaymentTypeId INTEGER NOT NULL,
                                 FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId),
