@@ -4,6 +4,12 @@ using Bangazon.Models;
 
 public class OrderManager
 {
+    private DatabaseInterface _db;
+
+    public OrderManager(DatabaseInterface db)
+    {
+        _db = db;
+    }
     public bool AddProductToOrder(Product produtId)
     {
         return true;

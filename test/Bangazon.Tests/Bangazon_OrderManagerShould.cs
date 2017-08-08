@@ -9,9 +9,12 @@ namespace Bangazon.Tests
 
         private readonly OrderManager _orderManager;
 
+        private DatabaseInterface _db;
+
         public OrderManagerShould()
         {
-            _orderManager = new OrderManager();
+            _db = new DatabaseInterface("BAGOLOOT_TEST_DB");
+            _orderManager = new OrderManager(_db);
         }
 
         [Fact]

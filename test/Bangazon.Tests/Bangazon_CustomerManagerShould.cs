@@ -75,6 +75,7 @@ namespace Bangazon.Tests
 
             PaymentType newPaymentType = new PaymentType() {
                 PaymentTypeId = 1,
+                Name = "Visa",
                 AccountNumber = 7287492,
                 CustomerId = 13
             };
