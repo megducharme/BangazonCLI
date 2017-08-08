@@ -11,46 +11,46 @@ public class CustomerManager
     {
         _db = db;
     }
-    private List<Customer> _AllCustomers = new List<Customer>();
-    private List<PaymentType> _ActiveCustomerPaymentTypes = new List<PaymentType>();
-    private List<Product> _ActiveCustomerProducts = new List<Product>();
-    public Customer ActiveCustomer;
+    private List<Customer> _allCustomers = new List<Customer>();
+    private List<PaymentType> _activeCustomerPaymentTypes = new List<PaymentType>();
+    private List<Product> _activeCustomerProducts = new List<Product>();
+    public static Customer activeCustomer;
 
     public void AddCustomer(Customer newCustomer)
     {
-        _AllCustomers.Add(newCustomer);
+        _allCustomers.Add(newCustomer);
     }
 
     public List<Customer> GetAllCustomers()
     {
-        return _AllCustomers;
+        return _allCustomers;
     }
 
-    public List<PaymentType> GetActiveCustomerPaymentTypes()
+    public List<PaymentType> GetactiveCustomerPaymentTypes()
     {
-        return _ActiveCustomerPaymentTypes;
+        return _activeCustomerPaymentTypes;
     }
 
     public List<Product> GetCustomerProducts()
     {
-        return _ActiveCustomerProducts;
+        return _activeCustomerProducts;
     }
 
-    public Customer SetActiveCustomer(Customer selectedCustomer)
+    public Customer SetactiveCustomer(Customer selectedCustomer)
     {
-        ActiveCustomer = selectedCustomer;
-        return ActiveCustomer;
+        activeCustomer = selectedCustomer;
+        return activeCustomer;
     }
 
     public List<PaymentType> AddNewPaymentType(PaymentType newPaymentType)
     {
-        _ActiveCustomerPaymentTypes.Add(newPaymentType);
-        return _ActiveCustomerPaymentTypes;
+        _activeCustomerPaymentTypes.Add(newPaymentType);
+        return _activeCustomerPaymentTypes;
     }
 
     public List<Product> AddCustomerProduct(Product newProduct)
     {
-        _ActiveCustomerProducts.Add(newProduct);
-        return _ActiveCustomerProducts;
+        _activeCustomerProducts.Add(newProduct);
+        return _activeCustomerProducts;
     }
 }
