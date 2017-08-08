@@ -29,9 +29,11 @@ namespace Bangazon.Tests
                 Phone = "5555555555"
             };
 
+            List<Customer> emptyList = _customerManager.GetAllCustomers();
+            Assert.True(emptyList.Count == 0);
+
             _customerManager.AddCustomer(customerToAdd);
             List<Customer> allCustomers = _customerManager.GetAllCustomers();
-
             Assert.Contains(customerToAdd, allCustomers);
         }
 
@@ -40,7 +42,7 @@ namespace Bangazon.Tests
         {
             Customer newCustomer = new Customer();
 
-           List<Customer> allCustomers = _customerManager.GetAllCustomers();
+            List<Customer> allCustomers = _customerManager.GetAllCustomers();
             Assert.True(allCustomers.Count == 0);
 
             _customerManager.AddCustomer(newCustomer);
@@ -63,7 +65,6 @@ namespace Bangazon.Tests
             };
 
             Customer currentActiveCustomer = _customerManager.SetActiveCustomer(selectedCustomer);
-
             Assert.Equal(selectedCustomer, currentActiveCustomer);
 
         }
@@ -78,8 +79,10 @@ namespace Bangazon.Tests
                 CustomerId = 13
             };
 
-            List<PaymentType> allPaymentTypes = _customerManager.AddNewPaymentType(newPaymentType);
+            List<PaymentType> emptyList = _customerManager.GetActiveCustomerPaymentTypes();
+            Assert.True(emptyList.Count == 0);
 
+            List<PaymentType> allPaymentTypes = _customerManager.AddNewPaymentType(newPaymentType);
             Assert.Contains(newPaymentType, allPaymentTypes);
         }
 
@@ -95,14 +98,15 @@ namespace Bangazon.Tests
                 DateCreated = DateTime.Now
             };
 
-            List<Product> allProducts = _customerManager.AddCustomerProduct(newProduct);
+            List<Product> emptyProductList = _customerManager.GetCustomerProducts();
+            Assert.True(emptyProductList.Count == 0);
 
+            List<Product> allProducts = _customerManager.AddCustomerProduct(newProduct);
             Assert.Contains(newProduct, allProducts);
         }
         public void Dispose()
         {
-            // _db.Delete("DELETE FROM toy");
-            // _db.Delete("DELETE FROM child");
+       
         }
     }
 }
