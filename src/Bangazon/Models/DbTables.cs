@@ -15,7 +15,7 @@ namespace Bangazon.Models
                                 `price` integer not null,
                                 `datecreated` datetime not null,
                                 CustomerId INTEGER NOT NULL,
-                                FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId))";
+                                FOREIGN KEY (Id) REFERENCES Customer(Id))";
             }
         }
         
@@ -42,7 +42,7 @@ namespace Bangazon.Models
                                 `name`	varchar(80) not null, 
                                 `accountnumber` integer not null,
                                 CustomerId INTEGER NOT NULL,
-                                FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId))";
+                                FOREIGN KEY (Id) REFERENCES Customer(Id))";
             }
         }
 
@@ -56,8 +56,8 @@ namespace Bangazon.Models
                                 `dateclosed` datetime, 
                                 CustomerId INTEGER NOT NULL,
                                 PaymentTypeId INTEGER NOT NULL,
-                                FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId),
-                                FOREIGN KEY (PaymentTypeId) REFERENCES PaymentType(PaymentTypeId))";
+                                FOREIGN KEY (Id) REFERENCES Customer(Id),
+                                FOREIGN KEY (Id) REFERENCES PaymentType(Id))";
             }
         }
         public static string OrderProduct
@@ -68,8 +68,8 @@ namespace Bangazon.Models
                                 `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                                 CustomerId INTEGER NOT NULL,
                                 ProductId INTEGER NOT NULL,
-                                FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId),
-                                FOREIGN KEY (ProductId) REFERENCES Product(ProductId))";
+                                FOREIGN KEY (Id) REFERENCES Customer(Id),
+                                FOREIGN KEY (Id) REFERENCES Product(Id))";
             }
         }
     }

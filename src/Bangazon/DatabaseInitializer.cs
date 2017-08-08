@@ -37,7 +37,7 @@ namespace Bangazon.Data
                             insert into paymenttype values (null, 'Chase', '2116745', 1);
                             insert into paymenttype values (null, 'Visa', '9826745', 3);
 
-                            insert into [order] values (null, '2017/07/08', '2017/07/08', 2, 2);
+                            insert into [order] values (null, '2017/08/08', '2017/08/10', 2, 1);
                             insert into [order] values (null, '2017/08/08', '2017/08/10', 3, 4);
                             insert into [order] values (null, '2017/07/08', '2017/08/11', 3, 4);
                             insert into [order] values (null, '2017/07/08', '2017/08/10', 1, 3);
