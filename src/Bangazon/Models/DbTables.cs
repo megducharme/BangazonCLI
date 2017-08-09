@@ -4,11 +4,7 @@ namespace Bangazon.Models
 {
     public class DbTables
     {
-        public static string Product
-        {
-            get
-            {
-                return $@"create table product (
+        public static string Product = $@"create table product (
                                 `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                                 `name`	varchar(80) not null, 
                                 `quantity` integer not null default 0,
@@ -16,41 +12,24 @@ namespace Bangazon.Models
                                 `datecreated` datetime not null,
                                 CustomerId INTEGER NOT NULL,
                                 FOREIGN KEY (Id) REFERENCES Customer(Id))";
-            }
-        }
         
-        public static string Customer
-        {
-            get
-            {
-                return $@"create table customer (
+        public static string Customer = $@"create table customer (
                                 `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                                 `name`	varchar(80) not null, 
                                 `address` varchar(80) not null,
                                 `city` varchar(80) not null,
+                                `state` varchar(80) not null,
                                 `zip` integer not null,
                                 `phone` integer not null)";
-            }
-        }
 
-        public static string PaymentType 
-        {
-            get
-            {
-                return $@"create table paymenttype (
+        public static string PaymentType = $@"create table paymenttype (
                                 `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                                 `name`	varchar(80) not null, 
                                 `accountnumber` integer not null,
                                 CustomerId INTEGER NOT NULL,
                                 FOREIGN KEY (Id) REFERENCES Customer(Id))";
-            }
-        }
 
-        public static string Order 
-        {
-            get
-            {
-                return $@"create table [order] (
+        public static string Order = $@"create table [order] (
                                 `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                                 `datecreated` datetime not null,
                                 `dateclosed` datetime, 
@@ -58,19 +37,12 @@ namespace Bangazon.Models
                                 PaymentTypeId INTEGER NOT NULL,
                                 FOREIGN KEY (Id) REFERENCES Customer(Id),
                                 FOREIGN KEY (Id) REFERENCES PaymentType(Id))";
-            }
-        }
-        public static string OrderProduct
-        {
-            get
-            {
-                return $@"create table orderproduct (
+
+        public static string OrderProduct = $@"create table orderproduct (
                                 `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                                 CustomerId INTEGER NOT NULL,
                                 ProductId INTEGER NOT NULL,
                                 FOREIGN KEY (Id) REFERENCES Customer(Id),
                                 FOREIGN KEY (Id) REFERENCES Product(Id))";
-            }
-        }
     }
 }

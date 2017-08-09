@@ -22,10 +22,10 @@ namespace Bangazon.Data
                     if(customersExist == false)
                     {
                         db.BulkInsert($@"
-                            insert into customer values (null, 'Meg Ducharme', 'West Nashville', 'Nashville', 37209, '55555555555');
-                            insert into customer values (null, 'Kyle Ducharme', 'West Nashville', 'Nashville', 37209, '55555555555');
-                            insert into customer values (null, 'Meg Armstrong', 'West Nashville', 'Nashville', 37209, '55555555555');
-                            insert into customer values (null, 'Colleen Ducharme', 'West Nashville', 'Nashville', 37209, '55555555555');
+                            insert into customer values (null, 'Meg Ducharme', 'West Nashville', 'Nashville', 'TN', 37209, '55555555555');
+                            insert into customer values (null, 'Kyle Ducharme', 'West Nashville', 'Nashville', 'TN', 37209, '55555555555');
+                            insert into customer values (null, 'Meg Armstrong', 'West Nashville', 'Nashville', 'TN', 37209, '55555555555');
+                            insert into customer values (null, 'Colleen Ducharme', 'West Nashville', 'Nashville', 'TN', 37209, '55555555555');
 
                             insert into product values (null, 'Flowers', 4, 20.50, '2017/08/06', 1);
                             insert into product values (null, 'Chair', 14, 29.99, '2017/08/06', 1);
