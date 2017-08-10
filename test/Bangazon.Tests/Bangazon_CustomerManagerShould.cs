@@ -12,15 +12,20 @@ namespace Bangazon.Tests
 
         public CustomerManagerShould()
         {
-            _db = new DatabaseInterface("BAGOLOOT_TEST_DB");
+            _db = new DatabaseInterface("BANGAZON_TEST_DB");
             _customerManager = new CustomerManager(_db);
+            _db.CheckDatabaseTable("Customer", DbTables.Customer);
+            _db.CheckDatabaseTable("Product", DbTables.Product);
+            _db.CheckDatabaseTable("PaymentType", DbTables.PaymentType);
+            _db.CheckDatabaseTable("[Order]", DbTables.Order);
+            _db.CheckDatabaseTable("OrderProduct", DbTables.OrderProduct);
         }
 
         [Fact]
         public void AddNewCustomer()
         {
+
             Customer customerToAdd = new Customer() {
-                CustomerId = 13,
                 Name = "Meg Ducharme",
                 Address = "West Nashville",
                 City = "Nashville",
@@ -29,12 +34,21 @@ namespace Bangazon.Tests
                 Phone = "5555555555"
             };
 
+            Console.WriteLine(customerToAdd.ZipCode);
+
             List<Customer> emptyList = _customerManager.GetAllCustomers();
             Assert.True(emptyList.Count == 0);
 
-            _customerManager.AddCustomer(customerToAdd);
+            int customerId = _customerManager.AddCustomer(customerToAdd);
+            customerToAdd.Id = customerId;
+
             List<Customer> allCustomers = _customerManager.GetAllCustomers();
-            Assert.Contains(customerToAdd, allCustomers);
+            Assert.Equal(customerToAdd.Name, allCustomers[0].Name);
+            Assert.Equal(customerToAdd.Address, allCustomers[0].Address);
+            Assert.Equal(customerToAdd.City, allCustomers[0].City);
+            Assert.Equal(customerToAdd.State, allCustomers[0].State);
+            Assert.Equal(customerToAdd.ZipCode, allCustomers[0].ZipCode);
+            Assert.Equal(customerToAdd.Phone, allCustomers[0].Phone);
         }
 
         [Fact]
@@ -43,10 +57,13 @@ namespace Bangazon.Tests
             Customer newCustomer = new Customer();
 
             List<Customer> allCustomers = _customerManager.GetAllCustomers();
+            Console.WriteLine("should be 0 here " + allCustomers.Count);
             Assert.True(allCustomers.Count == 0);
 
             _customerManager.AddCustomer(newCustomer);
+
             List<Customer> allCustomers2 = _customerManager.GetAllCustomers();
+            Console.WriteLine("should be 1 here " + allCustomers2.Count);
             Assert.True(allCustomers.Count > 0);
 
         }
@@ -55,7 +72,6 @@ namespace Bangazon.Tests
         public void UserShouldBeAbleToSelectActiveCustomer()
         {
             Customer selectedCustomer = new Customer() {
-                CustomerId = 13,
                 Name = "Meg Ducharme",
                 Address = "West Nashville",
                 City = "Nashville",
@@ -74,7 +90,7 @@ namespace Bangazon.Tests
         {
 
             PaymentType newPaymentType = new PaymentType() {
-                PaymentTypeId = 1,
+                Id = 1,
                 Name = "Visa",
                 AccountNumber = 7287492,
                 CustomerId = 13
@@ -91,7 +107,6 @@ namespace Bangazon.Tests
         public void UserSHouldBeAbleToAddAProductForACustomer()
         {
             Product newProduct = new Product(){
-                ProductId = 1,
                 Name = "Computer",
                 Quantity = 2,
                 Price = 1200.00,
@@ -107,7 +122,7 @@ namespace Bangazon.Tests
         }
         public void Dispose()
         {
-       
+            _db.Delete("DELETE FROM customer");
         }
     }
 }

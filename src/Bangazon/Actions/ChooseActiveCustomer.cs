@@ -4,27 +4,26 @@ using Bangazon.Models;
 
 namespace Bangazon.Actions
 {
-  public class ChooseActiveCustomer
-  {
+    public class ChooseActiveCustomer
+    {
     public static void DoAction(CustomerManager customerManager)
     {
-      Console.Clear();
-      Console.WriteLine ("Choose active customer");
+        Console.Clear();
+        Console.WriteLine ("Choose active customer");
 
-      List<Customer> customers = customerManager.GetAllCustomers();
-      foreach (Customer customer in customers)
-      {
-          Console.WriteLine($"{customer.Id}. {customer.Name}");
-      }
+        List<Customer> customers = customerManager.GetAllCustomers();
 
-      Console.Write ("> ");
-      string customerName = Console.ReadLine();
-    //   Customer kid = customerManager.GetCustomer(int.Parse(customerName));
-      
-    //   Console.WriteLine ("Enter toy");
-    //   Console.Write ("> ");
-    //   string toyName = Console.ReadLine();
-    //   bag.Add(toyName, kid);
+        foreach (Customer customer in customers)
+        {
+            Console.WriteLine($"{customer.Id}. {customer.Name}");
+        }
+
+        Console.Write ("> ");
+        string customerId = Console.ReadLine();
+        Customer chosenCustomer = customerManager.GetCustomer(int.Parse(customerId));
+        customerManager.SetActiveCustomer(chosenCustomer);
+        Console.WriteLine(CustomerManager.activeCustomer.Name);
+
     }
-  }
+    }
 }
