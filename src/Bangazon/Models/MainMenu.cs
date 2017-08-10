@@ -7,7 +7,9 @@ namespace Bangazon
     public int Show()
     {
       Console.Clear();
-      Console.WriteLine ("*********************************************************");
+      Console.WriteLine("The Active Custoer is: " + CustomerManager.activeCustomer.Name);
+      Console.WriteLine();
+      Console.WriteLine ("********************* ************************************");
       Console.WriteLine ("**  Welcome to Bangazon! Command Line Ordering System  **");
       Console.WriteLine ("*********************************************************");
       Console.WriteLine ("1. Create a customer account");

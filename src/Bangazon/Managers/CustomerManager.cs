@@ -16,7 +16,7 @@ public class CustomerManager
     private List<Customer> _allCustomers = new List<Customer>();
     private List<PaymentType> _activeCustomerPaymentTypes = new List<PaymentType>();
     private List<Product> _activeCustomerProducts = new List<Product>();
-    public static Customer activeCustomer;
+    public static Customer activeCustomer = new Customer(){Name = "There is no active customer!"};
 
     public int AddCustomer(Customer newCustomer)
     {
@@ -65,37 +65,28 @@ public class CustomerManager
         return activeCustomer;
     }
 
-    public List<PaymentType> AddNewPaymentType(PaymentType newPaymentType)
+    public int AddNewPaymentType(PaymentType newPaymentType)
     {
+        int paymentTypeId = 0;
+
+        string sqlCmd = $"insert into paymentType values (null, '{newPaymentType.Name}', {newPaymentType.AccountNumber},{newPaymentType.CustomerId})";
+        paymentTypeId = _db.Insert(sqlCmd);
+
         _activeCustomerPaymentTypes.Add(newPaymentType);
-        return _activeCustomerPaymentTypes;
+
+        return paymentTypeId;
     }
 
-    public List<Product> AddCustomerProduct(Product newProduct)
+    public int AddCustomerProduct(Product newProduct)
     {
+        int productId = 0;
+
+        string sqlCmd = $"insert into product values (null, '{newProduct.Name}', {newProduct.Quantity}, {newProduct.Price}, {newProduct.CustomerId}, '{newProduct.DateCreated}')";
+        productId = _db.Insert(sqlCmd);
+
         _activeCustomerProducts.Add(newProduct);
-        return _activeCustomerProducts;
-    }
 
-    public void SetActiveCustomer(int customerId)
-    {
-        _db.Query($"select {customerId}, name, address, city, state, zip, phone from customer",
-                (SqliteDataReader reader) => {
-                    _allCustomers.Clear();
-                    while (reader.Read ())
-                    {
-                        CustomerManager.activeCustomer = (new Customer(){
-                            Id = reader.GetInt32(0),
-                            Name = reader[1].ToString(),
-                            Address = reader[2].ToString(),
-                            City = reader[3].ToString(),
-                            State = reader[4].ToString(),
-                            ZipCode = reader.GetInt32(5),
-                            Phone = reader[6].ToString()
-                        });
-                    }
-                }
-            );
+        return productId;
     }
 
     public Customer GetCustomer(int id) =>  _allCustomers.SingleOrDefault(customer => customer.Id == id);
