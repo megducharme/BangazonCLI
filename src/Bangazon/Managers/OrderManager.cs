@@ -9,7 +9,6 @@ public class OrderManager
     private List<Product> _allProducts = new List<Product>();
     public static Order _customerActiveOrder = new Order(){Id = 0};
     private List<PaymentType> _allPaymentTypes = new List<PaymentType>();
-    private List<Order> _allCustomerOrders = new List<Order>();
 
     public OrderManager(DatabaseInterface db)
     {
@@ -105,28 +104,20 @@ public class OrderManager
         return _allPaymentTypes;
     } 
 
-    public List<Order> GetCustomerOrders()
-    {
-        _db.Query("select * from order",
-                (SqliteDataReader reader) => {
-                    _allPaymentTypes.Clear();
-                    while (reader.Read ())
-                    {
-                        _allPaymentTypes.Add(new PaymentType(){
-                            Id = reader.GetInt32(0),
-                            Name = reader[1].ToString(),
-                            AccountNumber = reader.GetInt32(2),
-                            CustomerId = reader.GetInt32(2)
-                        });
-                    }
-                }
-            );
-        return _allCustomerOrders;    
-    }
-
     public int AddPaymentTypeToOrder(int paymentId)
     {
         int activeCustomerOrderId = _customerActiveOrder.Id;
-        return _db.Insert($"update [order] set paymenttypeid={paymentId} Where Id={_customerActiveOrder.Id}");
+        int completedOrderId = 0;
+
+        if(activeCustomerOrderId == 0)
+        {
+            Console.WriteLine("You have no products in your cart! Go shopping :)");
+        }
+        else
+        {
+            completedOrderId = _db.Insert($"update [order] set paymenttypeid={paymentId} Where Id={_customerActiveOrder.Id}");
+        }
+        
+        return completedOrderId;
     }
 }
