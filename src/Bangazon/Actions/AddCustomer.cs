@@ -11,28 +11,28 @@ namespace Bangazon.Actions
 
         Console.Clear();
         Console.WriteLine ("Enter Customer Name");
-        Console.WriteLine ("> ");
+        Console.Write ("> ");
         string customerName = Console.ReadLine();
 
         Console.WriteLine ("Enter Street Address");
-        Console.WriteLine ("> ");
+        Console.Write ("> ");
         string customerStreetAddress = Console.ReadLine();
 
         Console.WriteLine ("Enter City");
-        Console.WriteLine ("> ");
+        Console.Write ("> ");
         string customerCity = Console.ReadLine();
 
         Console.WriteLine ("Enter State (ex MD)");
-        Console.WriteLine ("> ");
+        Console.Write ("> ");
         string customerState = Console.ReadLine();
 
         Console.WriteLine ("Enter Postal Code");
-        Console.WriteLine ("> ");
+        Console.Write ("> ");
         string customerPostalCode = Console.ReadLine();
         int postalCode = int.Parse(customerPostalCode);
 
         Console.WriteLine ("Enter Phone Number");
-        Console.WriteLine ("> ");
+        Console.Write ("> ");
         string customerPhoneNumber = Console.ReadLine();
 
         Customer newCustomer = new Customer(){

@@ -6,7 +6,7 @@ namespace Bangazon
   {
     public int Show()
     {
-      Console.Clear();
+      // Console.Clear();
       Console.WriteLine("The Active Custoer is: " + CustomerManager.activeCustomer.Name);
       Console.WriteLine();
       Console.WriteLine ("********************* ************************************");

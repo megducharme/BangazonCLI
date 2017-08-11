@@ -13,7 +13,7 @@ using System.Collections;
         public DatabaseInterface(string database)
         {
             string env = $"{Environment.GetEnvironmentVariable(database)}";
-            _connectionString = $"Data Source=/Users/meganducharme/workspace/c19_server_side/bangazon/bangazonCLI/test/Bangazon.Tests/test.db";
+            _connectionString = $"Data Source={env}";
             _connection = new SqliteConnection(_connectionString);
         }
 

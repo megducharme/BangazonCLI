@@ -6,8 +6,8 @@ namespace Bangazon.Models
     {
         public int Id {get;set;}
         public DateTime DateCreated {get;set;}
-        public DateTime DateClosed {get;set;}
+        public DateTime? DateClosed {get;set;}
         public int CustomerId {get;set;}
-        public int PaymentId {get;set;}
+        public int? PaymentId {get;set;}
     }
 }

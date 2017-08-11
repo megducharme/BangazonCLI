@@ -32,14 +32,20 @@ namespace Bangazon
 
                 switch (choice)
                 {
-                    // Menu option 1: Add new customer
                     case 1:
                         AddCustomer.DoAction(customerManager);
                         break;
 
-                    // Menu option 2: Choosing active customer
                     case 2:
                         ChooseActiveCustomer.DoAction(customerManager);
+                        break;
+                    
+                    case 3:
+                        AddPaymentType.DoAction(customerManager);
+                        break;
+
+                    case 4:
+                        AddProductToCart.DoAction(orderManager);
                         break;
                 }
             } while (choice != 7);

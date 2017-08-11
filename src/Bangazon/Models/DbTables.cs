@@ -34,7 +34,7 @@ namespace Bangazon.Models
                                 `datecreated` datetime not null,
                                 `dateclosed` datetime, 
                                 CustomerId INTEGER NOT NULL,
-                                PaymentTypeId INTEGER NOT NULL,
+                                PaymentTypeId INTEGER,
                                 FOREIGN KEY (Id) REFERENCES Customer(Id),
                                 FOREIGN KEY (Id) REFERENCES PaymentType(Id))";
 

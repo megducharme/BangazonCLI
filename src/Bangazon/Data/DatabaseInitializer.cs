@@ -27,20 +27,20 @@ namespace Bangazon.Data
                             insert into customer values (null, 'Meg Armstrong', 'West Nashville', 'Nashville', 'TN', 37209, '55555555555');
                             insert into customer values (null, 'Colleen Ducharme', 'West Nashville', 'Nashville', 'TN', 37209, '55555555555');
 
-                            insert into product values (null, 'Flowers', 4, 20.50, '2017/08/06', 1);
-                            insert into product values (null, 'Chair', 14, 29.99, '2017/08/06', 1);
-                            insert into product values (null, 'Cup', 56, 9.99, '2017/08/06', 1);
-                            insert into product values (null, 'Purse', 2, 129.99, '2017/08/06', 1);
+                            insert into product values (null, 'Flowers', 4, 20.50, '2017-08-10 10:55:44.000', 1);
+                            insert into product values (null, 'Chair', 14, 29.99, '2017-08-11 10:55:44.000', 1);
+                            insert into product values (null, 'Cup', 56, 9.99, '2017-08-09 10:55:44.000', 1);
+                            insert into product values (null, 'Purse', 2, 129.99, '2017-08-08 10:55:44.000', 1);
 
                             insert into paymenttype values (null, 'Visa', '9826745', 1);
                             insert into paymenttype values (null, 'MasterCard', '9845745', 2);
                             insert into paymenttype values (null, 'Chase', '2116745', 1);
                             insert into paymenttype values (null, 'Visa', '9826745', 3);
 
-                            insert into [order] values (null, '2017/08/08', '2017/08/10', 2, 1);
-                            insert into [order] values (null, '2017/08/08', '2017/08/10', 3, 4);
-                            insert into [order] values (null, '2017/07/08', '2017/08/11', 3, 4);
-                            insert into [order] values (null, '2017/07/08', '2017/08/10', 1, 3);
+                            insert into [order] values (null, '2017/08/08', '2017-08-11 10:55:44.000', 2, 1);
+                            insert into [order] values (null, '2017/08/08', '2017-08-12 10:55:44.000', 3, 4);
+                            insert into [order] values (null, '2017/07/08', '2017-08-15 10:55:44.000', 3, 4);
+                            insert into [order] values (null, '2017/07/08', '2017-08-14 10:55:44.000', 1, 3);
 
                             insert into orderproduct values (null, 1, 3);
                             insert into orderproduct values (null, 1, 4);
