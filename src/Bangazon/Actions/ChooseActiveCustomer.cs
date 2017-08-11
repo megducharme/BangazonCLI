@@ -22,6 +22,9 @@ namespace Bangazon.Actions
         string customerId = Console.ReadLine();
         Customer chosenCustomer = customerManager.GetCustomer(int.Parse(customerId));
         CustomerManager.activeCustomer = chosenCustomer;
+        OrderManager.SetActiveOrder();
+        
+
     }
     }
 }

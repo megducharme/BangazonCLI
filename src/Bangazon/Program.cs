@@ -44,8 +44,12 @@ namespace Bangazon
                         AddPaymentType.DoAction(customerManager);
                         break;
 
-                    case 4:
+                    case 5:
                         AddProductToCart.DoAction(orderManager);
+                        break;
+
+                    case 6:
+                        CloseOrder.DoAction(orderManager);
                         break;
                 }
             } while (choice != 7);

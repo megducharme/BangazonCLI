@@ -5,9 +5,11 @@ using Microsoft.Data.Sqlite;
 
 public class OrderManager
 {
-    private DatabaseInterface _db;
+    public static DatabaseInterface _db;
     private List<Product> _allProducts = new List<Product>();
-    public static Order _customerActiveOrder = null;
+    public static Order _customerActiveOrder = new Order(){Id = 0};
+    private List<PaymentType> _allPaymentTypes = new List<PaymentType>();
+    private List<Order> _allCustomerOrders = new List<Order>();
 
     public OrderManager(DatabaseInterface db)
     {
@@ -37,11 +39,10 @@ public class OrderManager
 
     public int AddProductToOrder(int productId)
     {
-        SetActiveOrder();
         Order activeOrder = _customerActiveOrder;
         int newOrderProductId = 0;
 
-        if(activeOrder != null)
+        if(activeOrder.Id != 0)
         {
             newOrderProductId = _db.Insert($"insert into orderproduct values(null, {activeOrder.Id}, {productId})");
             Console.WriteLine("active order isn't null, added new product to an order!");
@@ -65,23 +66,67 @@ public class OrderManager
         return newOrderId;
     }
 
-    public void SetActiveOrder()
+    public static void SetActiveOrder()
     {
-        _db.Query($"select * from [order] where customerid={CustomerManager.activeCustomer.Id} and paymenttypeId=null",
+        Console.WriteLine("this is actually happening");
+        _db.Query($"select id, datecreated, dateclosed, customerid, paymenttypeid from [order] where customerid={CustomerManager.activeCustomer.Id} and paymenttypeid is null",
                 (SqliteDataReader reader) => {
                     while (reader.Read ())
                     {
                         _customerActiveOrder = new Order(){
                             Id = reader.GetInt32(0),
                             DateCreated = reader.GetDateTime(1),
-                            DateClosed = reader.GetDateTime(2),
+                            DateClosed = reader.IsDBNull(reader.GetOrdinal("dateclosed")) ? (DateTime?) null : reader.GetDateTime(2),
                             CustomerId = reader.GetInt32(3),
-                            PaymentId = reader.GetInt32(4)
+                            PaymentTypeId = reader.IsDBNull(reader.GetOrdinal("PaymentTypeId")) ? (int?) null : reader.GetInt32(4)
                         };
                     Console.WriteLine("setting active order!");
                     }
+                });
+
+    }
+
+    public List<PaymentType> GetAllPaymentTypes()
+    {
+        _db.Query($"select id, name, accountnumber from paymenttype where customerid={CustomerManager.activeCustomer.Id}",
+                (SqliteDataReader reader) => {
+                    _allPaymentTypes.Clear();
+                    while (reader.Read ())
+                    {
+                        _allPaymentTypes.Add(new PaymentType(){
+                            Id = reader.GetInt32(0),
+                            Name = reader[1].ToString(),
+                            AccountNumber = reader.GetInt32(2),
+                            CustomerId = reader.GetInt32(2)
+                        });
+                    }
                 }
             );
+        return _allPaymentTypes;
+    } 
 
+    public List<Order> GetCustomerOrders()
+    {
+        _db.Query("select * from order",
+                (SqliteDataReader reader) => {
+                    _allPaymentTypes.Clear();
+                    while (reader.Read ())
+                    {
+                        _allPaymentTypes.Add(new PaymentType(){
+                            Id = reader.GetInt32(0),
+                            Name = reader[1].ToString(),
+                            AccountNumber = reader.GetInt32(2),
+                            CustomerId = reader.GetInt32(2)
+                        });
+                    }
+                }
+            );
+        return _allCustomerOrders;    
+    }
+
+    public int AddPaymentTypeToOrder(int paymentId)
+    {
+        int activeCustomerOrderId = _customerActiveOrder.Id;
+        return _db.Insert($"update [order] set paymenttypeid={paymentId} Where Id={_customerActiveOrder.Id}");
     }
 }

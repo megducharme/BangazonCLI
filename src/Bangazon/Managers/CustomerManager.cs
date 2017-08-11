@@ -4,7 +4,6 @@ using System.Linq;
 using Bangazon.Models;
 using Microsoft.Data.Sqlite;
 
-
 public class CustomerManager
 {
     private DatabaseInterface _db;
@@ -56,13 +55,6 @@ public class CustomerManager
     public List<Product> GetCustomerProducts()
     {
         return _activeCustomerProducts;
-    }
-
-    public Customer SetActiveCustomer(Customer selectedCustomer)
-    {
-        activeCustomer = selectedCustomer;
-        Console.WriteLine("the active customer is " + activeCustomer.Name);
-        return activeCustomer;
     }
 
     public int AddNewPaymentType(PaymentType newPaymentType)
